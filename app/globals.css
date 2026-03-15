@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0d0d0d; /* Глибокий чорний */
+  --foreground: #f2f2f2; /* М'який білий текст */
+
+  --card: #1a1a1a; /* Колір карток та блоків */
+  --primary: #ff6b00; /* Той самий помаранчевий */
+  --primary-hover: #cc5500; /* Темно-помаранчевий для наведення */
+  --muted: #808080; /* Сірий для підписів */
+  --border: #262626; /* Колір меж */
+}
+
+@theme inline {
+  /* Кольори */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+
+  /* Шрифти */
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui;
+  --font-display: var(--font-orbitron), sans-serif;
+}
+
+/* Базові стилі */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+html {
+  scroll-padding-top: 80px;
+  scroll-behavior: smooth;
+}
+
+/* Заголовки за замовчуванням будуть з авто-шрифтом */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Кастомний скролбар у стилі проєкту */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--card);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
