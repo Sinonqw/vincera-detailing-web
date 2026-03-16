@@ -32,7 +32,7 @@ const CTAButton = ({ className, variant = "primary", text = "Записатис�
                 <p className="text-muted text-sm">Оберіть зручний спосіб зв'язку</p>
               </div>
 
-              <ContactForm onSuccess={() => setIsOpen(false)} />
+              <ContactForm onSuccess={() => {}} setIsOpen={setIsOpen} />
             </motion.div>
           </div>
         )}

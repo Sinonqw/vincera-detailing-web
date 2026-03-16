@@ -9,14 +9,14 @@ const StepContact = ({ total }: { total: number }) => {
 
   return (
     <div>
-      <ContactForm 
-        externalData={formData} 
-        buttonText={`Замовити за ${total} грн`}
-        onUpdate={(data) => setContactInfo(data)} 
-        onSuccess={() => setIsDone(true)}        
+      <ContactForm
+        externalData={formData}
+        totalPrice={total} 
+        onSuccess={() => setIsDone(true)}
+        setIsOpen={() => {}} 
       />
       <button onClick={prevStep}>Назад</button>
     </div>
   );
 };
-export default StepContact
+export default StepContact;

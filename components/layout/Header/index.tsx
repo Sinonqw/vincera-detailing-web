@@ -9,6 +9,31 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  const scrollToSection = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    e.preventDefault(); // Зупиняємо зміну URL
+
+    const targetId = href.replace("#", "");
+    const elem = document.getElementById(targetId);
+
+    if (elem) {
+      // Невеликий відступ зверху, щоб хедер не перекривав заголовок секції
+      const offset = 50;
+      const elementPosition = elem.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth", // Плавна анімація
+      });
+    }
+
+    // Якщо це мобільне меню — закриваємо його після кліку
+    if (isOpen) setIsOpen(false);
+  };
+
   // Стежимо за скролом
   useEffect(() => {
     const handleScroll = () => {
@@ -55,10 +80,10 @@ const Header = () => {
         <Logo isScrolled={isScrolled} />
 
         {/* Десктопна навігація */}
-        <DesktopNav isScrolled={isScrolled} navLinks={navLinks} />
+        <DesktopNav isScrolled={isScrolled} navLinks={navLinks} onNavigate={scrollToSection}/>
 
         {/* Мобільні дії */}
-        <MobileNav isOpen={isOpen} navLinks={navLinks} setIsOpen={setIsOpen} />
+        <MobileNav isOpen={isOpen} navLinks={navLinks} setIsOpen={setIsOpen} onNavigate={scrollToSection} />
       </div>
     </header>
   );

@@ -3,12 +3,14 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./Button";
 import { ContactMethodTabs } from "./ContactMethodTabs";
-
+import { services, carTypes } from "../sections/Calculator/data";
 interface ContactFormProps {
-  externalData?: any; // Для калькулятора
+  externalData?: any; 
   onSuccess: (data: any) => void;
   buttonText?: string;
   onUpdate?: (data: any) => void;
+  setIsOpen?: (open: boolean) => void;
+  totalPrice?: number;
 }
 
 export const ContactForm = ({
@@ -16,20 +18,21 @@ export const ContactForm = ({
   onSuccess,
   buttonText = "Записатися",
   onUpdate,
+  setIsOpen,
 }: ContactFormProps) => {
   const [method, setMethod] = useState<"phone" | "tg">("phone");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
 
-  // Локальний стейт, якщо зовнішніх даних немає
+
   const [localData, setLocalData] = useState({ name: "", phone: "", tg: "" });
 
   const currentData = externalData || localData;
 
   const updateData = (fields: any) => {
     if (externalData && onUpdate) {
-      onUpdate({ ...externalData, ...fields }); // Просто оновлюємо стейт у калькуляторі
+      onUpdate({ ...externalData, ...fields }); 
     } else {
       setLocalData((prev) => ({ ...prev, ...fields }));
     }
@@ -39,13 +42,23 @@ export const ContactForm = ({
     e.preventDefault();
     setStatus("loading");
 
-    // Якщо це калькулятор, тут можна додати логіку "Деталей" безпосередньо перед відправкою
+    const carLabel =
+      carTypes.find((c) => c.id === currentData.carType)?.label ||
+      currentData.carType;
+
+    const selectedServicesLabels = services
+      .filter((s) => currentData.services?.includes(s.id))
+      .map((s) => s.label)
+      .join(", ");
+
     const payload = {
       ...currentData,
+      carTypeName: carLabel,
+      totalPrice: totalPrice || 0,
+      servicesNames: selectedServicesLabels, 
       preferredMethod: method === "phone" ? "Телефон" : "Telegram",
       source: externalData ? "Калькулятор" : "Форма зворотного зв'язку",
     };
-
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -55,12 +68,24 @@ export const ContactForm = ({
 
       if (response.ok) {
         setStatus("success");
-        onSuccess(payload); 
+        onSuccess(payload);
+
+        setTimeout(() => {
+          if (setIsOpen) {
+            setIsOpen(false);
+          }
+        }, 2000);
       } else {
         setStatus("error");
+        setTimeout(() => {
+          setStatus("idle");
+        }, 2000);
       }
     } catch {
       setStatus("error");
+      setTimeout(() => {
+        setStatus("idle");
+      }, 2000);
     }
   };
 

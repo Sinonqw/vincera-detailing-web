@@ -8,9 +8,10 @@ interface IProps {
   setIsOpen: (open: boolean) => void;
   isOpen: boolean;
   navLinks: INavLink[];
+  onNavigate: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
 }
 
-const MobileNav = ({ setIsOpen, isOpen, navLinks }: IProps) => {
+const MobileNav = ({ setIsOpen, isOpen, navLinks, onNavigate }: IProps) => {
   return (
     <div className="md:hidden">
       {/* Кнопки керування в шапці */}

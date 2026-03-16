@@ -4,17 +4,19 @@ import CTAButton from "@/components/ui/CTAButton";
 interface IProps {
   navLinks: INavLink[];
   isScrolled: boolean;
+  onNavigate: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
 }
 
-const DesktopNav = ({ navLinks, isScrolled }: IProps) => {
+const DesktopNav = ({ navLinks, isScrolled, onNavigate }: IProps) => {
   return (
     <>
       <nav className="hidden md:flex items-center gap-8">
         {navLinks.map((link) => (
           <a
-            key={link.name}
             href={link.href}
-            className="text-sm uppercase tracking-widest hover:text-primary transition-colors"
+            key={link.name}
+            onClick={(e) => onNavigate(e, link.href)}
+            className="..."
           >
             {link.name}
           </a>
