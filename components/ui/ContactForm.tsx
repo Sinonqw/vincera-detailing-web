@@ -19,6 +19,7 @@ export const ContactForm = ({
   buttonText = "Записатися",
   onUpdate,
   setIsOpen,
+  totalPrice
 }: ContactFormProps) => {
   const [method, setMethod] = useState<"phone" | "tg">("phone");
   const [status, setStatus] = useState<

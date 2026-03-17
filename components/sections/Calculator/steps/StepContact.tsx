@@ -11,9 +11,8 @@ const StepContact = ({ total }: { total: number }) => {
     <div>
       <ContactForm
         externalData={formData}
-        totalPrice={total} 
+        totalPrice={total}
         onSuccess={() => setIsDone(true)}
-        setIsOpen={() => {}} 
       />
       <button onClick={prevStep}>Назад</button>
     </div>
