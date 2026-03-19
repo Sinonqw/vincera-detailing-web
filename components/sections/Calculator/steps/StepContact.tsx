@@ -11,6 +11,7 @@ const StepContact = ({ total }: { total: number }) => {
     <div>
       <ContactForm
         externalData={formData}
+        onUpdate={setContactInfo}
         totalPrice={total}
         onSuccess={() => setIsDone(true)}
       />
