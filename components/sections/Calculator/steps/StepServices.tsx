@@ -33,7 +33,7 @@ const StepServices = () => {
           >
             <service.icon size={24} className="text-primary" />
             <span className="flex-1 font-bold uppercase text-sm">{service.label}</span>
-            <span className="text-primary">від {service.basePrice}₽</span>
+            <span className="text-primary">від {service.basePrice}грн</span>
           </div>
         ))}
       </div>
