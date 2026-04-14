@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Vincera: Detailing Management System
+Это full-stack решение для студий детейлинга. Проект объединяет современный интерфейс для клиентов и автоматизацию бизнес-процессов на бэкенде
 
-## Getting Started
+🌟 Key Features
+Dynamic Booking System: Интуитивно понятный интерфейс для записи на услуги детейлинга
+Business Automation (n8n): Полностью автоматизированный воркфлоу обработки заявок
+CRM Integration: Автоматическое ведение базы клиентов и заказов в Google Sheets
+Instant Notifications: Мгновенные уведомления о новых записях в Telegram для администратора
+High-End Design: Премиальный адаптивный интерфейс, оптимизированный под любые устройства
 
-First, run the development server:
+🏗️ Architecture
+Проект построен на основе Decoupled Architecture:
+Frontend: Next.js (App Router) для высокой производительности и SEO
+Automation Layer: n8n выступает в роли "мозга" системы, обрабатывая вебхуки с фронтенда
+Data Stack: Google Sheets API для хранения данных и Telegram API для связи
 
-```bash
+🚀 Getting Started
+1. Prerequisites
+Node.js 18.x или выше
+
+Установленный инстанс n8n (Self-hosted или Cloud)
+
+2. Installation
+git clone https://github.com/Sinonqw/vincera-detailing-web.git
+cd vincera-detailing-web
+npm install
+3. Environment Setup
+Создай файл .env.local в корне проекта:
+
+Фрагмент коду
+N8N_WEBHOOK_URL=your_n8n_webhook_url
+4. Running the App
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🤖 n8n Workflow Logic
+Система автоматизации Vincera выполняет следующие шаги:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Catch Hook: Принимает данные формы записи с сайта
+Data Processing: Валидирует и форматирует данные
+Google Sheets: Создает новую строку в таблице учета
+Telegram Bot: Отправляетсообщение менеджеру студии/клиенту
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<img width="1044" height="469" alt="image" src="https://github.com/user-attachments/assets/42835dd4-82f1-4060-80b2-a507a5a0397c" />
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🛠 Tech Stack
+Framework: Next.js 
+Language: TypeScript
+Styling: Tailwind CSS
+Automation: n8n (Webhooks & API)
+Deployment: Vercel
